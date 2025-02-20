@@ -143,7 +143,6 @@ const App = () => {
 
   const logout = () => {
     googleLogout();
-    // console.log("logout");
     removeItemLocalStorage("userDetails");
     setShowLogin(false);
     // if (guestUser) {
