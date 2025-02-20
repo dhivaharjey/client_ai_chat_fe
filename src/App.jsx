@@ -134,7 +134,7 @@ const App = () => {
   }, [guestUser]);
   const getAiModels = async () => {
     try {
-      const res = await axios.get("http://localhost:4000/aiModels");
+      const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/aiModels`);
       setAiModels(res?.data);
     } catch (error) {
       console.log(error);
