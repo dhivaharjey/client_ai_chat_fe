@@ -24,7 +24,7 @@ const App = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [guestUser, setGuestUser] = useState(false);
   const bottomRef = useRef(null);
-  console.log("initial", guestUser);
+  // console.log("initial", guestUser);
 
   const guestUserLogin = () => {
     setGuestUser(true);
