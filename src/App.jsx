@@ -114,7 +114,7 @@ const App = () => {
   ];
   // console.log(uniqueTitles);
   useEffect(() => {
-    console.log("use efefect", guestUser);
+    // console.log("use efefect", guestUser);
     getAiModels();
     const user = getItemLocalStorage("userDetails");
     if (user) {
@@ -137,6 +137,7 @@ const App = () => {
       const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/aiModels`);
       setAiModels(res?.data);
     } catch (error) {
+      toast.error(error?.message);
       console.log(error);
     }
   };
@@ -163,7 +164,7 @@ const App = () => {
             <div>
               <GoogleLogin
                 onSuccess={(credentialResponse) => {
-                  const userDetails = jwtDecode(credentialResponse.credential);
+                  const userDetails = jwtDecode(credentialResponse?.credential);
                   // console.log(credentialResponse);
 
                   console.log(userDetails);
@@ -177,6 +178,7 @@ const App = () => {
                 }}
                 onError={(error) => {
                   console.log(error);
+                  toast.error(error?.message);
                 }}
                 logo_alignment="left"
                 theme="filled_blue"
