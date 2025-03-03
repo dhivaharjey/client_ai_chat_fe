@@ -137,19 +137,22 @@ const App = () => {
       const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/aiModels`);
       setAiModels(res?.data);
     } catch (error) {
-      toast.error(error?.message);
+      toast.error(error?.message, {
+        closeButton: true,
+      });
       console.log(error);
     }
   };
 
   const logout = () => {
     googleLogout();
-    removeItemLocalStorage("userDetails");
     setShowLogin(false);
+    setGuestUser(false);
+    removeItemLocalStorage("userDetails");
+    removeItemLocalStorage("guestUser");
     // if (guestUser) {
     //   clearAllChatHistory();
     // }
-    setGuestUser(false);
     console.log("logout", guestUser);
   };
   useEffect(() => {
