@@ -72,6 +72,7 @@ const App = () => {
         `${import.meta.env.VITE_BASE_URL}/chat`,
         payload
       );
+      console.log(res?.data);
 
       const userMessage = {
         title: chatTitle,
@@ -98,7 +99,11 @@ const App = () => {
       // setAiReply(res?.data);
       setUserInput("");
     } catch (error) {
-      toast.error(error?.message || "Something went wrong");
+      // console.log(error);
+
+      toast.error(
+        error?.message || error?.response?.data || "Something went wrong"
+      );
     } finally {
       setIsLoading(false);
     }
@@ -151,6 +156,7 @@ const App = () => {
     setGuestUser(false);
     removeItemLocalStorage("userDetails");
     removeItemLocalStorage("guestUser");
+    toast.success("Logged out !!!");
     // if (guestUser) {
     //   clearAllChatHistory();
     // }
