@@ -19,7 +19,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [previousChats, setPreviousChats] = useState([]);
   const [currentTitle, setCurrentTitle] = useState(null);
-  const [aiModels, setAiModels] = useState(null);
+  const [aiModels, setAiModels] = useState([]);
   const [selectAiModelName, setSelectAiModelName] = useState("gpt-4o-mini");
   const [showLogin, setShowLogin] = useState(false);
   const [guestUser, setGuestUser] = useState(false);
@@ -30,7 +30,7 @@ const App = () => {
     setGuestUser(true);
     setShowLogin(true);
     setItemLocalStorage("guestUser", "guestUserDetails");
-    console.log("logout in", guestUser);
+    // console.log("logout in", guestUser);
   };
 
   const clearAllChatHistory = () => {
@@ -98,7 +98,7 @@ const App = () => {
       // setAiReply(res?.data);
       setUserInput("");
     } catch (error) {
-      toast.error(error);
+      toast.error(error?.message || "Something went wrong");
     } finally {
       setIsLoading(false);
     }
@@ -136,8 +136,9 @@ const App = () => {
     try {
       const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/aiModels`);
       setAiModels(res?.data);
+      console.log(res?.data);
     } catch (error) {
-      toast.error(error?.message, {
+      toast.error(error?.message || "Something went wrong", {
         closeButton: true,
       });
       console.log(error);
@@ -153,7 +154,7 @@ const App = () => {
     // if (guestUser) {
     //   clearAllChatHistory();
     // }
-    console.log("logout", guestUser);
+    // console.log("logout", guestUser);
   };
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behaviour: "smooth" });
@@ -170,7 +171,7 @@ const App = () => {
                   const userDetails = jwtDecode(credentialResponse?.credential);
                   // console.log(credentialResponse);
 
-                  console.log(userDetails);
+                  // console.log(userDetails);
                   if (userDetails) {
                     setShowLogin(true);
                   }

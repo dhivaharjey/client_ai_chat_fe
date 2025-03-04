@@ -156,8 +156,20 @@ select:focus {
 }
 .history li {
   list-style-type: none;
-  padding: 0.9rem 0;
+  padding: 0.5rem 0.6rem;
+  /* background-color: #444654; */
+  /* overflow: hidden; */
   cursor: pointer;
+  border-radius: 0.4rem;
+  height: 32px;
+  margin-bottom: 0.3rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 15px;
+}
+.history li:hover {
+  background-color: #444654;
 }
 .main {
   height: 100vh;
