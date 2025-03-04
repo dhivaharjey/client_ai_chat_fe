@@ -102,7 +102,7 @@ const App = () => {
       // console.log(error);
 
       toast.error(
-        error?.message || error?.response?.data || "Something went wrong"
+        error?.response?.data || error?.message || "Something went wrong"
       );
     } finally {
       setIsLoading(false);
