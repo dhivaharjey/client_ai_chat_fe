@@ -19,7 +19,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [previousChats, setPreviousChats] = useState([]);
   const [currentTitle, setCurrentTitle] = useState(null);
-  const [aiModels, setAiModels] = useState([]);
+  // const [aiModels, setAiModels] = useState([]);
   const [selectAiModelName, setSelectAiModelName] = useState("gpt-4o-mini");
   const [showLogin, setShowLogin] = useState(false);
   const [guestUser, setGuestUser] = useState(false);
@@ -118,9 +118,21 @@ const App = () => {
     ...new Set(previousChats?.map((previousChats) => previousChats?.title)),
   ];
   // console.log(uniqueTitles);
+  // const getAiModels = async () => {
+  //   try {
+  //     const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/aiModels`);
+  //     setAiModels(res?.data);
+  //     console.log(res?.data);
+  //   } catch (error) {
+  //     toast.error(error?.message || "Something went wrong", {
+  //       closeButton: true,
+  //     });
+  //     console.log(error);
+  //   }
+  // };
   useEffect(() => {
     // console.log("use efefect", guestUser);
-    getAiModels();
+    // getAiModels();
     const user = getItemLocalStorage("userDetails");
     if (user) {
       setShowLogin(true);
@@ -137,18 +149,6 @@ const App = () => {
     const lastChat = guestUser ? "" : getItemLocalStorage("lastChatTitle");
     setCurrentTitle(lastChat);
   }, [guestUser]);
-  const getAiModels = async () => {
-    try {
-      const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/aiModels`);
-      setAiModels(res?.data);
-      console.log(res?.data);
-    } catch (error) {
-      toast.error(error?.message || "Something went wrong", {
-        closeButton: true,
-      });
-      console.log(error);
-    }
-  };
 
   const logout = () => {
     googleLogout();
@@ -238,7 +238,7 @@ const App = () => {
               <span style={{ marginRight: "10px" }}>✚</span>
               New Chat
             </button>
-            <select
+            {/* <select
               value={selectAiModelName}
               onChange={(e) => setSelectAiModelName(e.target.value)}
             >
@@ -247,7 +247,7 @@ const App = () => {
                   {model?.id}
                 </option>
               ))}
-            </select>
+            </select> */}
             <ul className="history">
               {uniqueTitles?.map((title, index) => (
                 <li key={index} onClick={() => uniqueChatHistory(title)}>
